@@ -6,7 +6,7 @@ Class 9: Access on NGINX+ - Authentication for Web Access
 Instructors at AppWorld 2024:
 
 -  Sam Park <s.park@f5.com>
--  Scott Huddy <s.huddy@f5.com>
+-  Scott A. Huddy <s.huddy@f5.com>
 
 UDF Lab Maintainers:
 
