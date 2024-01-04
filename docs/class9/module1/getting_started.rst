@@ -1,7 +1,7 @@
 Let's Get Started - Join UDF Course
 ===================================
 
-This lab will go through initial setup and add you the agility class.  
+This lab will go through initial setup and add you the AppWorld class.  
 
 
 Follow these steps to complete this lab:
@@ -10,19 +10,19 @@ Follow these steps to complete this lab:
 
 #. Open your web browser
 #. Navigate to https://udf.f5.com/courses
-#. login using your UDF credentials, you should have received an email from noreply@registration.udf.f5.com
+#. Login using your UDF credentials, you should have received an email from noreply@registration.udf.f5.com
 
-.. image:: /_static/1email.png
+.. image:: ../images/1email.png
 
 #. Upon first login, you will be prompted to change your password. 
 
-.. image:: /_static/2password.png
+.. image:: ../images/2password.png
 
 #. Review and accept the terms for using UDF.
 
-.. image:: /_static/3terms.png
+.. image:: ../images/3terms.png
 
-#. Locate the class "Access Foundation 210: Access on F5 NGINX Plus – Authentication for Web Access" and click launch. 
+#. Locate the class "AppWorld 2024 - F5 NGINX Plus Access: Authentication for Web Access" and click launch. 
 
 .. image:: ../images/ualaunch.png
 
@@ -30,19 +30,19 @@ Follow these steps to complete this lab:
 
 .. image:: ../images/5join.png
 
-#. the link for the lab guide (in case you haven't already opened it) can be found in the description box
+#. The link for the lab guide (in case you haven't already opened it) can be found in the description box
 
-.. image:: /_static/6guide.png
+.. image:: ../images/6guide.png
 
-#. click on the 'deployment' tab in the top left, notice your lab environment is spinning up, once up will have green arrow icon. 
+#. Click on the 'deployment' tab in the top left, notice your lab environment is spinning up, once up will have green arrow icon. 
 
 .. image:: ../images/7spinning.png
 
-**Exercise 2 - Open Web Shell to the Nginx Server and open firefox browser**
+**Exercise 2 - Open Web Shell to the Nginx Server and open Firefox browser**
 
-In this exercise, we will connect to the Nginx Server.   
+In this exercise, we will connect to the first Nginx Server.   
 
-#. Under the 'Systems' column, locate the 'Nginx' block. 
+#. Under the 'Systems' column, locate the 'NGINX 1' block. 
 
 .. image:: ../images/9webshell.png
   :width: 800

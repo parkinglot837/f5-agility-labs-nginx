@@ -6,12 +6,12 @@ This exercise will cover installing the Nginx JavaScript Module (njs) which is r
 Install Nginx+ njs module
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. First step you'll need to access the Nginx Instance and locate the webshell option on the udf under the system nginx
+1. First step you'll need to access the NGINX 1 Instance and locate the webshell option on the udf under the system nginx
 
    .. image:: ../images/9webshell.png
       :align: left
  
-2. Copy and paste below command into nginx webshell
+2. Copy and paste below command into nginx webshell (Use Ctrl/Shift+V to paste)
 
    .. code:: shell
 
@@ -22,7 +22,7 @@ Install Nginx+ njs module
    .. image:: ../images/ualab03.png
       :align: left
 
-3. verify modules are loaded into nginx with the below command.
+3. verify modules are loaded into nginx with the below command (Use Ctrl/Shift+V to paste again)
 
    .. code:: shell
        
@@ -60,7 +60,7 @@ The following directive needs to be included in the top-level (“main”) confi
 **save and exit file**
 
 .. note:: 
-   To quit nano, use the Ctrl+X key combination. If the file you are working on has been modified since the last time you saved it, you will be prompted to save the file first. Type y to save the file then press enter to confirm.
+   To quit nano, use the Ctrl+X key combination. If the file you are working on has been modified since the last time you saved it, you will be prompted to save the file first. Type 'y' to save the file then press enter to confirm.
 
 5. Verify nginx config is good and reload
      
@@ -78,26 +78,14 @@ The following directive needs to be included in the top-level (“main”) confi
 
 Create a clone of the nginx-openid-connect GitHub repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. attention:: 
-   There is a branch for each NGINX Plus release. Switch to the correct branch to ensure compatibility with the features and syntax of each release. The main branch works with the most recent NGINX Plus and JavaScript module releases.
 
-
-1. Verify version of nginx
+1. Clone the branch in your home directory with the command below.
 
 .. code:: shell
         
-   nginx -v
+   cd /home/ubuntu && git clone https://github.com/nginxinc/nginx-openid-connect.git
 
-.. image:: ../images/ualab_nginxv.png
-
-2. Now that we have the version number we are ready to clone the branch in github. Clone the branch in your home directory with the command 
-below.
-
-.. code:: shell
-        
-   cd /home/ubuntu && git clone --branch R28 https://github.com/nginxinc/nginx-openid-connect.git
-
-3. Verify the clone has completed by running the follow command.
+2. Verify the clone has completed by running the follow command.  Please do not close the UDF Shell browser tab!
 
 .. code:: shell
 
@@ -128,7 +116,7 @@ http://idp.f5lab.com:8080
 
 .. image:: ../images/keycloak_admin_page.png
 
-4. Now enter credentials provided and sign in.
+4. Now enter credentials provided and sign in (if prompted, don't save the password)
 
 .. note:: 
 	Username: admin
@@ -148,17 +136,17 @@ Create a Keycloak client for NGINX Plus in the Keycloak GUI:
 		
 .. image:: ../images/keycloak_click_create.png
 				
-3. On the Add Client page that opens enter the below values then click the  Save  button.
+3. On the Add Client page that opens enter the below values then click the 'Save' button.
 
-**Client ID – agility2023**
+**Client ID – appworld2024**
 
 **Client Protocol – openid-connect.**
 
 .. image:: ../images/ualab08.png
 
-4. On the Agility2023 clients page that opens, enter or select these values on the Settings tab:
+4. On the appworld2024 clients page that opens, enter or select these values on the Settings tab, then scroll down and click 'Save' (note that there is an underscore before 'codexch' in the path):
 
-Client ID - agility2023
+Client ID - appworld2024
 		
 Access Type – confidential
 
@@ -170,50 +158,49 @@ Valid Redirect URIs - http://nginxdemo.f5lab.com:8010/_codexch
 	For production, we strongly recommend that you use **SSL/TLS (port 443)**. The port number is **mandatory** even when you’re using the default port for HTTP (80) or HTTPS (443). 
 	Valid Redirect URIs – The URI of the NGINX Plus instance, including the port number, and ending in /_codexch
 
-5. Click the Credentials tab and make a note of the value in the Secret field. You will copy it into the NGINX Plus configuration file.
+5. Click the Credentials tab and copy the value in the 'Secret' field to the Firefox 'Clipboard', then make a note of it on your local machine by opening the Clipboard and copying the value. You will need this for the NGINX Plus configuration later.
 
 .. image:: ../images/client_secret.png
 	
-6. While still under the Agility2023 Clients Page Click the Roles tab, then click the Add Role button in the upper right corner of the page that 
+6. While still under the appworld2024 Clients Page Click the Roles tab, then click the Add Role button in the upper right corner of the page that 
 opens.
 
 .. image:: ../images/keycloak_click_role.png
 	
-7. On the Add Role page that opens, type a value in the Role Name field (here it is nginx-keycloak-role) and click the  Save  button.
+7. On the Add Role page that opens, type a value in the Role Name field (here it is nginx-keycloak-role) and click the 'Save' button.
 
 .. image:: ../images/keycloak_save_role.png
 	
 Creating a user in keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. In the left navigation column, click Users. On the Users page that opens, then click the Add user button in the upper right corner to create a new user.
+1. In the left navigation column, click Users. On the Users page that opens, then click the 'Add User' button in the upper right corner to create a new user with the Username 'user01', then click 'Save'.
 
 .. image:: ../images/keycloak_add_user.png
 	
 2. Once create user is completed now click on the Credentials Tab at the top of the screen. 
 
-3. Enter New Password agility2023 and confirm
+3. Enter the Password appworld2024 and Confirm
 
-4. Toggle Temporary to OFF
+4. Toggle Temporary to OFF, and clock 'Set Password' (yes, you're sure)
 
 .. image:: ../images/keycloak_cred.png
 	
-5. On the management page for the user (here, user01), click the Role Mappings tab. On the page that opens, select agility2023 on the Client 
-Roles drop‑down menu. Click nginx-keycloak-role in the Available Roles box, then click the Add selected button below the box. The role then appears in the Assigned Roles and Effective Roles boxes, as shown in the screenshot.
+5. On the management page for the user (here, user01), click the Role Mappings tab. On the page that opens, select appworld2024 on the Client 
+Roles drop‑down menu. Click nginx-keycloak-role in the Available Roles box, then click the 'Add selected' button below the box. The role then appears in the Assigned Roles and Effective Roles boxes, as shown in the screenshot.
 
 .. image:: ../images/keycloak_role_mappings.png
 
 Configure NGINX Plus as the OpenID Connect relying party
 ========================================================
 
-1. Now go back to the Nginx Web Shell connection you have open. You are going to run a configuration script.
+1. Now go back to the NGINX 1 UDF Shell browser tab that you have open. You are going to run a configuration script.
 
-Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW**
+Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW** (use the Client Secret note that you made earlier to help build the command syntax)
 
 .. code:: shell
 
-	./nginx-openid-connect/configure.sh -h nginxdemo.f5lab.com -k request -i agility2023 -s YOURCLIENTSECRET -x 
-http://idp.f5lab.com:8080/auth/realms/master/.well-known/openid-configuration
+	./nginx-openid-connect/configure.sh -h nginxdemo.f5lab.com -k request -i appworld2024 -s YOURCLIENTSECRET -x http://idp.f5lab.com:8080/auth/realms/master/.well-known/openid-configuration
 
 Output:
 
@@ -239,9 +226,9 @@ Output:
 
 .. code:: shell
 	
-	cd /nginx-openid-connect/
+	cd ./nginx-openid-connect/
 
-3. Now that you are in the nginx-openid-connect directory copy the below files.
+3. Now that you are in the nginx-openid-connect directory, use the provided command to copy the below files.
 
 frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_configuration.conf
 
@@ -273,7 +260,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 	nano openid_connect.server_conf
 
-8. Update the resolver to use local host file. 
+8. Update the resolver to use local host file as shown below. 
 
 .. image:: ../images/host_lookup.png
 
@@ -281,7 +268,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 .. note:: 
 
-	using host file because this is a lab make sure to put in LDNS server for resolver.
+	We are using the host file because this is a lab, so make sure to put in the LDNS server for the resolver.
 
 9. Using Nano edit the openid_connect_configuration.conf
 
@@ -289,7 +276,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 	nano openid_connect_configuration.conf
 
-10. modify secret from 0 to "yourclientsecret"
+10. Scroll down and modify the $oidc_client_secret from 0 to "yourclientsecret" from the earlier step, to look like the example below.  Do not forget to add the quotation marks!
 
 .. image:: ../images/save_secret.png
 
@@ -304,23 +291,23 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 Testing the config
 ==================
 
-Now that everything is done lets test the config!
+Now that everything is done lets test the config!  Please go back to the Firefox tab on your local browser:
 
-1. Clear recent history and cookies from the browser.
+1. Clear recent history and cookies from the browser (under Privacy & Security on the Firefox Settings tab).
 
 .. image:: ../images/clear_cookies.png
 
-2. Go back to firefox and open a new tab and put http://nginxdemo.f5lab.com:8010 into the browser url field and launch the page.
+2. While still in Firefox, open a new tab and put http://nginxdemo.f5lab.com:8010 into the browser url field and launch the page.
 
 .. image:: ../images/test_oidc.png
 
 Notice you'll be redirected to the IdP for login. 
 
-3. Once on the IdP page put in the credentials for the user you created. user01 with password agility2023
+3. Once on the IdP page put in the credentials for the user you created. user01 with password appworld2024 (do not save the credentials, if prompted)
 
 .. image:: ../images/auth_login.png
 
-You should now see the webservice!!!!!! You've been logged in and the browser has been issued a JWT Token establishing identity!
+You should now see the webservice! You've been logged in and the browser has been issued a JWT Token establishing identity!  You can view the token by clicking 'More tools' and 'Web Developer Tools' in the Firefox menu, then selecting the 'Storage' tab and highlighting "auth_token".
 
 .. image:: ../images/verificaion_webservice.png
 
@@ -330,7 +317,7 @@ Manage NGINX Plus with Instance Manager
 
 The OIDC authentication is working correctly. Now we will manage our NGINX Plus deployment with Instance Manager
 
-1. Open a new tab in Firefox and put https://10.1.1.6 into the browser url field and launch the page.   
+1. Open a new tab in Firefox and put https://nim.f5lab.com into the browser url field and launch the page (accept the risk and continue).
 
 .. image:: ../images/nms_login.png
 
@@ -342,15 +329,15 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 
 .. image:: ../images/nms_modules.png
 
-4. Once directed to main console page of NGINX Instance Manager, you will see the instructions on how to add NGINX instances to Instance Manager.
+4. Once directed to main console page of NGINX Instance Manager, click on 'Instances' and you will see the instructions on how to add NGINX instances to Instance Manager.
 
 .. image:: ../images/instance_manager_main.png
 
-5. Copy and run the below command on the nginx server to install the agent
+5. Copy and run the below command on the NGINX 1 server to install the agent
 
 .. code:: shell
 
-	curl -k https://10.1.1.6/install/nginx-agent | sudo sh
+	curl -k https://nim.f5lab.com/install/nginx-agent | sudo sh
 
 6. Once the installation is complete, start the nginx agent
 
@@ -363,57 +350,12 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 .. image:: ../images/instance_manager_instances.png
 
 
-8. Clicking on the instance will show installation details and metrics
+8. Clicking on the instance will show installation details and metrics (these may take a few minutes to correlate)
 
 .. image:: ../images/instance_manager_details.png  
 
 
-9. Now we can click on the Edit Config button to view and apply config changes to our NGINX Plus authenticator. We will update the frontend.conf config file to leverage JWT claims for Logging and Rate Limiting. First we will extend the logging format with two additional fields, $jwt_header_alg and $jwt_claim_aud. Then we will publish the config to the nginx instance.
+Creating the Nginx Plus Cluster in Instance Manager
+===================================================
 
-.. image:: ../images/instance_manager_logs_publish.png
-
-10. You should receive a green notification banner confirming the config publication was successful 
-
-.. image:: ../images/instance_manager_notify_logs.png 
-
-11. Now we can switch tabs and log back into our nginx backend application and hit the refresh button a few times
-
-.. image:: ../images/browser_refresh.png
-
-12. Now we if we check to see nginx log files, we will see new log entries including the two aditional fields added in the configuration. You should see RS256 and agility2023 as the signature algorithm and audience claim respectively.  
-
-.. code:: shell
-
-	tail -n 30 /var/log/nginx/access.log
-
-.. image:: ../images/nginx_access_logs.png
-
-13. Next we will update the frontend.conf file to add rate limiting based on the audience JWT claim presented by the user. First we define the rate limit in the http context with the following line
-
-.. code:: shell
-
-	limit_req_zone $jwt_claim_aud zone=10rpm_per_aud:1m rate=10r/m;
-
-And then we instantiate the rate limit in the location block where nginx will serve the authenticated users with the following lines 
-
-.. code:: shell
-
-	limit_req zone=10rpm_per_aud;
-
-We will include both lines in the Instance Manager config manager console as such and publish the configuration
-
-
-.. image:: ../images/instance_manager_rpm.png
-
-14. Once the config is successfully published, switch to the firefox browser and refresh the nginx application a few times. You should get 503 response pages triggered when you surpass the rate limit of 10 requests per minute.  
-
-.. image:: ../images/browser_refresh_503.png
-
-
-
-
-
-	
- 
-
-
+Placeholder

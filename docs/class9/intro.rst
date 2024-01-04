@@ -1,37 +1,39 @@
-.. image:: images/AG-2021-light.jpg
-   :align: left
+.. image:: images/AW-2024-red.jpg
+     :align: left
 
 
 Introduction
 ------------
 
-Welcome to Access on NGINX+ - Authentication for Web Access. In this course we will learn the following:
+Welcome to Access on NGINX Plus, Authentication for Web Access. In this course we will learn the following:
 
-•	How to install Nginx Plus Module njs required for Authentication Proxy. 
+•	How to install the Nginx Plus Module njs required for Authentication Proxy 
 
-•   How to navigate and utilize the Nginx Plus configuration for OIDC authentication usecases 
+•   How to navigate and utilize the Nginx Plus configuration for OIDC authentication use cases 
 
-•   how to configure keycloak for use with nginx+
+•   How to configure keycloak for use with Nginx Plus
 
 
 Please follow the instructions provided by the instructor to start your lab.
 
 
 .. attention:: 
-	 All work for this lab will be performed exclusively from the udf session. No installation or interaction with your local system is required.
+	 All work for this lab will be performed exclusively from the UDF session. No installation or interaction with your local system is required.
 
 Lab Topology
 ~~~~~~~~~~~~
 
 The following components have been included in your lab environment:
 
-- 1 x Infa Server Running the below Docker Containers (Ubuntu 20.04)
+- 1 x Infa Server running the below Docker Containers (Ubuntu 22.04)
 
   - firefox
   - keycloak
   - nginxhello
 
-- 1 x Linux Server (Ubuntu 20.04) running Nginx (nginx/1.21.5 (nginx-plus-r26))
+- 1 x Linux Server (Ubuntu 22.04) running Nginx Instance Manager (2.15.0)
+- 3 x Linux Servers (Ubuntu 22.04) running Nginx+ (nginx-plus-r30-p1)
+
 
 Lab Components
 ~~~~~~~~~~~~~~
@@ -45,15 +47,11 @@ Lab Setup
    :header-rows: 1
 
    * - **Hostname**
-     - **IP-ADDR**
+     - **IP/PORT**
      - **Credentials**
-   * - nginx
-     - 10.1.1.5
-     - ubuntu/ubuntu
-   * - infra
+   * - idp.f5lab.com (infra)
      - 10.1.1.4
-     - admin/admin
-       root/default
+     - 
    * - container/keycloak
      - 10.1.1.4:8080
      - admin/admin
@@ -63,9 +61,23 @@ Lab Setup
    * - container/firefox
      - 10.1.1.4:5180
      -
-
-
-High Level View of auth flow for the lab Environment
+   * - nginx1
+     - 10.1.1.6
+     - 
+   * - nginx2
+     - 10.1.1.7
+     - 
+   * - nginx3
+     - 10.1.1.8
+     -
+   * - bigip.f5lab.com
+     - 10.1.1.9:443
+     - admin/f5r0x!
+   * - nim.f5lab.com
+     - 10.1.1.11:443
+     - <cached>
+  
+High-Level View of auth flow for the lab environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: images/nginx_view.png
