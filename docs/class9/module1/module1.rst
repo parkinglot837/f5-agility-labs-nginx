@@ -1,17 +1,17 @@
 Installing Prerequisites:
 =========================
 
-This exercise will cover installing the Nginx JavaScript Module (njs) which is required for handling the interaction between NGINX Plus and the OpenID Connect provider (IdP). 
+This exercise will cover installing the Nginx JavaScript Module (njs) which is required for handling the interaction between NGINX Plus and the OpenID Connect identity provider (IdP). 
 
-Install Nginx+ njs module
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Install NGINX Plus njs module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. First step you'll need to access the NGINX 1 Instance and locate the webshell option on the udf under the system nginx
+1. First step, you'll need to locate the Webshell option in UDF under Systems to access the NGINX 1 instance.
 
    .. image:: ../images/9webshell.png
       :align: left
  
-2. Copy and paste below command into nginx webshell (Use Ctrl/Shift+V to paste)
+2. Copy and paste below command into the nginx webshell (Use Ctrl/Shift+V to paste).
 
    .. code:: shell
 
@@ -22,7 +22,7 @@ Install Nginx+ njs module
    .. image:: ../images/ualab03.png
       :align: left
 
-3. verify modules are loaded into nginx with the below command (Use Ctrl/Shift+V to paste again)
+3. Verify that the modules are loaded into NGINX Plus with the below command (Use Ctrl/Shift+V to paste again).  Note: You can also use Ctrl/Shift+C to copy from the Webshell. 
 
    .. code:: shell
        
@@ -34,12 +34,12 @@ Install Nginx+ njs module
      :align: left
      :width: 800
 
-4. now you will need to load the module in the nginx.conf 
+4. Now you will need to load the module into nginx.conf. 
 
 The following directive needs to be included in the top-level (“main”) configuration context in /etc/nginx/nginx.conf, to load the NGINX JavaScript module:
 
 
-**copy and run below command on the nginx server to open the nano editor and select the main nginx configuration file**
+**Copy and run below command on the NGINX 1 server to open the nano editor and select the main nginx configuration file**
 
 
 .. code:: shell
@@ -47,7 +47,7 @@ The following directive needs to be included in the top-level (“main”) confi
    nano /etc/nginx/nginx.conf
 
 
-**below is the line of code that needs to be copied into /etc/nginx/nginx.conf file**
+**Below is the line of code that needs to be copied into /etc/nginx/nginx.conf file**
 
 .. code:: shell
       
@@ -57,10 +57,10 @@ The following directive needs to be included in the top-level (“main”) confi
 
 .. image:: ../images/ualab05.png
 
-**save and exit file**
-
 .. note:: 
    To quit nano, use the Ctrl+X key combination. If the file you are working on has been modified since the last time you saved it, you will be prompted to save the file first. Type 'y' to save the file then press enter to confirm.
+
+**Save and exit the file**
 
 5. Verify nginx config is good and reload
      
@@ -85,7 +85,7 @@ Create a clone of the nginx-openid-connect GitHub repository
         
    cd /home/ubuntu && git clone https://github.com/nginxinc/nginx-openid-connect.git
 
-2. Verify the clone has completed by running the follow command.  Please do not close the UDF Shell browser tab!
+2. Verify the clone has completed by running the following command.  
 
 .. code:: shell
 
@@ -93,17 +93,18 @@ Create a clone of the nginx-openid-connect GitHub repository
 		
 **screenshot of output**
 	
-.. image:: ../images/ualab_verifyclone.png
-	
+.. image:: ../images/OPENID_Connect_verify.jpg
+
+**Important: Please do not close the UDF Shell browser tab!**	
 
 Configuring the IdP Keycloak:
 =============================
    
 .. note:: 
-   These next steps will guide you through creating a keycloak client for NGINX Plus in the Keycloak GUI
+   These next steps will guide you through creating a keycloak client for NGINX Plus in the Keycloak GUI.
 
 
-1. Connect to firefox container via udf connection methods
+1. Connect to the Firefox container via UDF connection method.
    
    .. image:: ../images/ualab06.png
 
@@ -156,7 +157,7 @@ Valid Redirect URIs - http://nginxdemo.f5lab.com:8010/_codexch
 
 .. note::
 	For production, we strongly recommend that you use **SSL/TLS (port 443)**. The port number is **mandatory** even when you’re using the default port for HTTP (80) or HTTPS (443). 
-	Valid Redirect URIs – The URI of the NGINX Plus instance, including the port number, and ending in /_codexch
+	Valid Redirect URIs – This is the URI of the NGINX Plus origin web server instance, including the port number, and ending in /_codexch
 
 5. Click the Credentials tab and copy the value in the 'Secret' field to the Firefox 'Clipboard', then make a note of it on your local machine by opening the Clipboard and copying the value. You will need this for the NGINX Plus configuration later.
 
@@ -167,27 +168,27 @@ opens.
 
 .. image:: ../images/keycloak_click_role.png
 	
-7. On the Add Role page that opens, type a value in the Role Name field (here it is nginx-keycloak-role) and click the 'Save' button.
+7. On the Add Role page that opens, type a value in the Role Name field (here it is: nginx-keycloak-role) and click the 'Save' button.
 
 .. image:: ../images/keycloak_save_role.png
 	
 Creating a user in keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. In the left navigation column, click Users. On the Users page that opens, then click the 'Add User' button in the upper right corner to create a new user with the Username 'user01', then click 'Save'.
+1. In the left navigation column, click Users. On the Users page that opens, then click the 'Add User' button in the upper right corner to create a new user with the Username "user01" (no quotes), then click 'Save'.
 
 .. image:: ../images/keycloak_add_user.png
 	
-2. Once create user is completed now click on the Credentials Tab at the top of the screen. 
+2. Once create user is completed, now click on the Credentials Tab at the top of the screen. 
 
-3. Enter the Password appworld2024 and Confirm
+3. Enter the Password appworld2024 and Confirm.
 
-4. Toggle Temporary to OFF, and clock 'Set Password' (yes, you're sure)
+4. Toggle Temporary to OFF, and clock 'Set Password' (click yes, you're sure).
 
 .. image:: ../images/keycloak_cred.png
 	
-5. On the management page for the user (here, user01), click the Role Mappings tab. On the page that opens, select appworld2024 on the Client 
-Roles drop‑down menu. Click nginx-keycloak-role in the Available Roles box, then click the 'Add selected' button below the box. The role then appears in the Assigned Roles and Effective Roles boxes, as shown in the screenshot.
+5. On the management page for the user (here, user01), click the 'Role Mappings' tab. On the page that opens, select appworld2024 on the 'Client 
+Roles' drop‑down menu. Click 'nginx-keycloak-role' in the 'Available Roles' box, then click the 'Add selected' button below the box. The role then appears in the 'Assigned Roles' and 'Effective Roles' boxes, as shown in the screenshot.
 
 .. image:: ../images/keycloak_role_mappings.png
 
@@ -196,18 +197,18 @@ Configure NGINX Plus as the OpenID Connect relying party
 
 1. Now go back to the NGINX 1 UDF Shell browser tab that you have open. You are going to run a configuration script.
 
-Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW** (use the Client Secret note that you made earlier to help build the command syntax)
+Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW** (use the Client Secret note that you made earlier to help build the command syntax).
 
 .. code:: shell
 
 	./nginx-openid-connect/configure.sh -h nginxdemo.f5lab.com -k request -i appworld2024 -s YOURCLIENTSECRET -x http://idp.f5lab.com:8080/auth/realms/master/.well-known/openid-configuration
 
-Output:
+**screenshot of output**
 
 .. image:: ../images/nginx_config_script.png
 	:width: 800
 
-.. note:: Information on switches being used in script
+.. note:: Information on switches being used in script:
 
 	 echo " -h | --host <server_name>           # Configure for specific host (server FQDN)"
     
@@ -222,7 +223,7 @@ Output:
 	 echo " -x | --insecure                     # Do not verify IdP's SSL certificate"
 
 
-2. Change Directory
+2. Change Directory.
 
 .. code:: shell
 	
@@ -236,7 +237,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 	cp frontend.conf openid_connect.js openid_connect.server_conf openid_connect_configuration.conf /etc/nginx/conf.d/
 
-4. After copying files change directory to /etc/nginx/conf.d/
+4. After copying files change directory to '/etc/nginx/conf.d/'.
 
 .. code:: shell 
 
@@ -254,7 +255,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 	
 **save file and close**
 
-7. Using Nano edit the openid_connect.server_conf file
+7. Using Nano edit the 'openid_connect.server_conf' file.
 
 .. code:: shell
 
@@ -270,19 +271,19 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 	We are using the host file because this is a lab, so make sure to put in the LDNS server for the resolver.
 
-9. Using Nano edit the openid_connect_configuration.conf
+9. Using Nano edit the openid_connect_configuration.conf.
 
 .. code:: shell
 
 	nano openid_connect_configuration.conf
 
-10. Scroll down and modify the $oidc_client_secret from 0 to "yourclientsecret" from the earlier step, to look like the example below.  Do not forget to add the quotation marks!
+10. Scroll down and modify the $oidc_client_secret from 0 to "yourclientsecret" from the earlier step, to look like the example below.  **Do not forget to add the quotation marks!**
 
 .. image:: ../images/save_secret.png
 
 **save and close file**
 
-11. Reload Nginx
+11. Reload Nginx.
 
 .. code:: shell
 
@@ -291,7 +292,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 Testing the config
 ==================
 
-Now that everything is done lets test the config!  Please go back to the Firefox tab on your local browser:
+Now that everything is done lets test the config!  Please go back to the Firefox tab on your local browser.
 
 1. Clear recent history and cookies from the browser (under Privacy & Security on the Firefox Settings tab).
 
@@ -315,7 +316,7 @@ You should now see the webservice! You've been logged in and the browser has bee
 Manage NGINX Plus with Instance Manager
 =======================================
 
-The OIDC authentication is working correctly. Now we will manage our NGINX Plus deployment with Instance Manager
+The OIDC authentication is working correctly. Now we will manage our NGINX Plus deployment with Instance Manager.
 
 1. Open a new tab in Firefox and put https://nim.f5lab.com into the browser url field and launch the page (accept the risk and continue).
 
@@ -333,13 +334,13 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 
 .. image:: ../images/instance_manager_main.png
 
-5. Copy and run the below command on the NGINX 1 server to install the agent
+5. Copy and run the below command on the NGINX 1 server to install the agent.
 
 .. code:: shell
 
 	curl -k https://nim.f5lab.com/install/nginx-agent | sudo sh
 
-6. Once the installation is complete, start the nginx agent
+6. Once the installation is complete, start the nginx agent.
 
 .. code:: shell
 
@@ -350,7 +351,7 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 .. image:: ../images/instance_manager_instances.png
 
 
-8. Clicking on the instance will show installation details and metrics (these may take a few minutes to correlate)
+8. Clicking on the instance will show installation details and metrics (these may take a few minutes to correlate).
 
 .. image:: ../images/instance_manager_details.png  
 
@@ -396,8 +397,10 @@ Open the file for editing in nano:
 ...add the following to the bottom of the file and Save (Ctrl-X):
 
 .. code:: shell
-	
+
    instance_group: default
+
+**screenshot of output**
 
 .. image:: ../images/instance-group-2.jpg
 
@@ -448,7 +451,7 @@ Name the staged configuration 'default-oidc' and click 'Save'.
    .. image:: ../images/big-ip-1.jpg
    .. image:: ../images/big-ip-2.jpg
 
-10. Navigate to DNS > GSLB > Pools > Pool List and select 'gslbPool'
+10. Navigate to DNS > GSLB > Pools > Pool List and select 'gslbPool'.
 
    .. image:: ../images/big-ip-3.jpg
    .. image:: ../images/big-ip-3.5.jpg
