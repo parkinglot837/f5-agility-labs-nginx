@@ -355,7 +355,135 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 .. image:: ../images/instance_manager_details.png  
 
 
-Creating the Nginx Plus Cluster in Instance Manager
-===================================================
+Create the Nginx Plus Cluster in Instance Manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Placeholder
+1. To begin, we need to install the same agent on the new NGINX servers. First open a webshell connection to NGINX 2 and then do the same for NGINX 3. 
+
+.. image:: ../images/add_instance-4.jpg
+
+Copy and run the below command on -both- the NGINX 2 and NGINX 3 servers to install the agent.
+
+.. code:: shell
+	
+   curl -k https://nim.f5lab.com/install/nginx-agent | sudo sh
+
+2. Once the installation is complete, start the nginx agent on -both- servers.
+
+.. code:: shell
+	
+   sudo systemctl start nginx-agent
+
+.. note:: 
+
+	Please leave all of the NGINX server webshell connections open!
+
+3. Go back to the Instances Overview in Instance Manager and you should see the new servers.
+
+.. image:: ../images/add_instance-7.jpg
+
+4. Now we'll go back to -all three- NGINX server's webshell connections and create the Instance Group (if the webshell is currently closed for NGINX 1, please reopen it).
+   To create the Instance Group, we need to edit the agent-dynamic.conf file and add an instance_group following the steps below for each of the three NGINX servers.
+
+Open the file for editing in nano:
+
+.. code:: shell
+	
+   nano /var/lib/nginx-agent/agent-dynamic.conf
+
+.. image:: ../images/instance-group-1.jpg
+
+...add the following to the bottom of the file and Save (Ctrl-X):
+
+.. code:: shell
+	
+   instance_group: default
+
+.. image:: ../images/instance-group-2.jpg
+
+...and then restart the agent.
+
+.. code:: shell
+	
+   sudo systemctl restart nginx-agent
+
+.. image:: ../images/instance-group-3.jpg
+
+You should now see the Instance Group named 'default' in the Instance Manager.  We will need to 'Stage' the configuration that we created on NGINX 1 and sync it to NGINX 2 and 3.
+
+   .. image:: ../images/instance-group-4.jpg
+
+
+5. Go back to Instances tab and select 'nginx-1', then click 'Edit config'.
+
+   .. image:: ../images/edit-config-nginx-1.jpg
+   
+6. Here you will select 'Save as' (the floppy disk icon).
+
+   .. image:: ../images/stage-1.jpg
+
+Name the staged configuration 'default-oidc' and click 'Save'.  
+
+   .. image:: ../images/stage-2.jpg
+
+7. In the 'Staged Configs', select 'default-oidc', then click 'Publish to'.
+
+   .. image:: ../images/stage-3.jpg
+
+   .. image:: ../images/stage-4.jpg
+
+8. Drop down the list and select 'default' under 'Instance Groups' and click 'Publish'.
+
+   .. image:: ../images/publish-1.jpg
+
+   .. image:: ../images/publish-2.jpg
+
+.. note:: 
+
+	You may see an error message indicating that the publish completed, but is degraded.  Please disregard. If you go back into Instances and select, for example 'nginx-3', you'll see that the configuration was successfully synchronized.
+
+   
+9.  Now we will log on to the BIG-IP (admin:f5r0x!) to test and validate the configuration.  
+
+   .. image:: ../images/big-ip-1.jpg
+   .. image:: ../images/big-ip-2.jpg
+
+10. Navigate to DNS > GSLB > Pools > Pool List and select 'gslbPool'
+
+   .. image:: ../images/big-ip-3.jpg
+   .. image:: ../images/big-ip-3.5.jpg
+
+11. Click the 'Statistics' tab and you'll see that only 'nginx1' is currently enabled and has 'Preferred' resolutions listed under 'Load Balancing'.
+
+   .. image:: ../images/big-ip-4.jpg
+   .. image:: ../images/big-ip-4.5.jpg
+
+12. Navigate back to DNS > GSLB > Pools > Pool List, select 'gslbPool' and click the 'Members' tab.
+
+   .. image:: ../images/big-ip-5.jpg
+
+13. Here we will check the boxes next to 'nginx2' and 'nginx3' and click 'Enable' to add them to the load balancing pool.
+    Refresh the page by clicking the 'Members' tab again and you will see the new members become active.
+    Now click the 'Statistics' tab again and we are ready to test the configuation.
+
+   .. image:: ../images/big-ip-6.jpg
+
+14. Go back to Firefox, open a new tab, and navigate to http://nginxdemo.f5lab.com:8010 again.
+    Log back in as user01 with password: appworld2024, as before.
+
+   .. image:: ../images/test-gslb-1.jpg
+
+15. Go back to the BIG-IP and refresh the page (Ctrl-F5) to verify that the successful login was performed by one of the other NGINX servers, in this case, nginx2.
+
+   .. image:: ../images/test-gslb-2.jpg
+
+16. Refresh the page in Firefox several times (Ctrl-R) and then refresh the BIG-IP Statistics again (Ctrl-F5) to confirm that the load balancing is leveraging each of the NGINX servers.
+
+   .. image:: ../images/test-gslb-3.jpg
+    
+
+Congratulations, you have successfully completed the lab!
+
+
+
+
