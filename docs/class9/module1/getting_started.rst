@@ -67,6 +67,9 @@ First we will open the Firefox browser.
 .. image:: ../images/UDF_Launch_Infra.jpg
   :width: 400
 
+.. attention:: 
+  If you see a shared memory notification, click 'OK'. Lab resources have been allocated appropriately. 
+
 12. Next, under the 'Systems' column, locate the 'NGINX 1' block. 
     
 13. Click 'Access' -> 'Webshell' and this will open a new tab on your local browser. 
