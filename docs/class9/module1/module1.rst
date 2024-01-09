@@ -92,7 +92,9 @@ Create a clone of the nginx-openid-connect GitHub repository
 	
 .. image:: ../images/OPENID_Connect_verify.jpg
 
-**Important: Please do not close the UDF Shell browser tab!**	
+.. attention::
+   
+   **Please do not close the UDF Shell browser tab!**	
 
 Configuring the IdP Keycloak:
 =============================
