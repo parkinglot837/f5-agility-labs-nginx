@@ -6,12 +6,7 @@ This exercise will cover installing the Nginx JavaScript Module (njs) which is r
 Install NGINX Plus njs module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. First step, you'll need to locate the Webshell option in UDF under Systems to access the NGINX 1 instance.
-
-   .. image:: ../images/9webshell.png
-      :align: left
- 
-2. Copy and paste below command into the nginx webshell (Use Ctrl/Shift+V to paste).
+1. Copy and paste below command into the NGINX 1 webshell (Use Ctrl/Shift+V to paste).
 
    .. code:: shell
 
@@ -22,7 +17,7 @@ Install NGINX Plus njs module
    .. image:: ../images/ualab03.png
       :align: left
 
-3. Verify that the modules are loaded into NGINX Plus with the below command (Use Ctrl/Shift+V to paste again).  Note: You can also use Ctrl/Shift+C to copy from the Webshell. 
+2. Verify that the modules are loaded into NGINX Plus with the below command (Use Ctrl/Shift+V to paste again).  Note: You can also use Ctrl/Shift+C to copy from the Webshell. 
 
    .. code:: shell
        
@@ -34,7 +29,7 @@ Install NGINX Plus njs module
      :align: left
      :width: 800
 
-4. Now you will need to load the module into nginx.conf. 
+3. Now you will need to load the module into nginx.conf. 
 
 The following directive needs to be included in the top-level (“main”) configuration context in /etc/nginx/nginx.conf, to load the NGINX JavaScript module:
 
@@ -62,7 +57,7 @@ The following directive needs to be included in the top-level (“main”) confi
 
 **Save and exit the file**
 
-5. Verify nginx config is good and reload
+4. Verify nginx config is good and reload
      
 **verify configuration is good**
      
