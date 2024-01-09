@@ -17,11 +17,13 @@ Install NGINX Plus njs module
    .. image:: ../images/ualab03.png
       :align: left
 
-2. Verify that the modules are loaded into NGINX Plus with the below command (Use Ctrl/Shift+V to paste again).  Note: You can also use Ctrl/Shift+C to copy from the Webshell. 
+2. Verify that the modules are loaded into NGINX Plus with the below command (Use Ctrl/Shift+V to paste again).  
 
    .. code:: shell
        
       sudo ls /etc/nginx/modules
+
+   .. note:: You can also use Ctrl/Shift+C to copy from the Webshell. 
 
    **screenshot of expected output**
 
@@ -29,7 +31,7 @@ Install NGINX Plus njs module
      :align: left
      :width: 800
 
-3. Now you will need to load the module into nginx.conf. 
+4. Now you will need to load the module into nginx.conf. 
 
 The following directive needs to be included in the top-level (“main”) configuration context in /etc/nginx/nginx.conf, to load the NGINX JavaScript module:
 
