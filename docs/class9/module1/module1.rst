@@ -102,10 +102,7 @@ Configuring the IdP Keycloak:
 .. note:: 
    These next steps will guide you through creating a keycloak client for NGINX Plus in the Keycloak GUI.
 
-
-1. Connect to the Firefox container via UDF connection method.
-   
-   .. image:: ../images/ualab06.png
+1. Open your browser tab with the Firefox container from the 'Getting Started' lab section.
 
 2. Login to keycloak
 
