@@ -141,10 +141,11 @@ Create a Keycloak client for NGINX Plus in the Keycloak GUI:
 
 .. image:: ../images/ualab08.png
 
-4. On the appworld2024 clients page that opens, enter or select these values on the Settings tab, then scroll down and click 'Save' (note that there is an underscore before 'codexch' in the path):
+4. On the appworld2024 clients page that opens, enter or select these values on the Settings tab, then scroll down and click 'Save':
 
 .. attention::
    You will need to type in the URI below, as it's not possible to paste into the Firefox conatiner.
+   Also, note that there is an underscore before 'codexch' in the path.
 
 Client ID - appworld2024
 		
