@@ -12,7 +12,7 @@ Follow these steps to complete this lab:
 
 2. Navigate to https://udf.f5.com/courses, or click the direct link to the course in your UDF Course Registration email (see below).
 
-3. Login using your UDF credentials, you should have received an email from: noreply@registration.udf.f5.com
+3. Login using your UDF credentials, you should have received an email from: noreply@registration.udf.f5.com.
 
 .. image:: ../images/UDF_Registration_email.jpg
   :width: 800
@@ -68,7 +68,7 @@ First we will open the Firefox browser.
   :width: 400
 
 .. attention:: 
-  If you see a shared memory notification, click 'OK'. Lab resources have been allocated appropriately. 
+  If you see a shared memory notification, click 'OK'. Lab resources have been allocated accordingly. 
 
 12. Next, under the 'Systems' column, locate the 'NGINX 1' block. 
     

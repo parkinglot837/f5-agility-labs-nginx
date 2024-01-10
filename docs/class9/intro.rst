@@ -7,11 +7,11 @@ Introduction
 
 Welcome to Access on NGINX Plus - Authentication for Web Access. In this course we will learn the following:
 
-•	How to install the Nginx Plus Module njs, required for Authentication Proxy 
+•	How to install the Nginx Plus module njs, required for Authentication Proxy 
 
 •   How to navigate and utilize the Nginx Plus configuration for OIDC authentication use cases 
 
-•   How to configure keycloak for use with Nginx Plus
+•   How to configure Keycloak for use with NGINX Plus
 
 •   How to create and load balance an Instance Group of NGINX Plus servers
 
@@ -28,7 +28,7 @@ The following components have been included in your lab environment:
 - 1 x Infa Server running the below Docker Containers (Ubuntu 22.04)
    - firefox
    - keycloak
-   - nginxhello
+   - nginxhello (origin server)
 - 1 x Linux Server (Ubuntu 22.04) running Nginx Instance Manager (2.15.0)
 - 3 x Linux Servers (Ubuntu 22.04) running NGINX Plus (nginx-plus-r30-p1)
 - 1 x F5 BIG-IP DNS virtual appliance (v17.1.0.1)
@@ -59,13 +59,13 @@ Lab Setup
    * - container/firefox
      - 10.1.1.4:5180
      -
-   * - nginx1
+   * - nginx-1
      - 10.1.1.6
      - 
-   * - nginx2
+   * - nginx-2
      - 10.1.1.7
      - 
-   * - nginx3
+   * - nginx-3
      - 10.1.1.8
      -
    * - bigip.f5lab.com

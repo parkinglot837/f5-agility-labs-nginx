@@ -30,14 +30,14 @@ Expected time to complete: **1.5 hours**
 
 .. important::
 
-   * **The Lab MC will provide the necessary details to connect to lab environment.**
+   * **The Lab MC will provide the necessary details to connect to lab environment**
 
-   * All work for this lab will be performed exclusively from the UDF Webshell and Firefox Container.
+   * All work for this lab will be performed exclusively from the UDF Webshell and Firefox Container
 
-   * No installation or interaction with your local system is required.
+   * No installation or interaction with your local system is required
 
 .. attention::
    * For anyone wishing to take this lab at a later date, the lab is hosted on
-     the F5 UDF Environment, and is called **"AppWorld 2024 - F5 NGINX Plus Access: Authentication for Web Access"**. 
+     the F5 UDF Environment, and is called **"AppWorld 2024 - F5 NGINX Plus Access: Authentication for Web Access"**
 
 Please work with your F5 account team for access. 

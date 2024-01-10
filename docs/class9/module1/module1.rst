@@ -59,7 +59,7 @@ The following directive needs to be included in the top-level (“main”) confi
 
 **Save and exit the file**
 
-4. Verify nginx config is good and reload
+4. Verify nginx config is good and reload.
      
 **verify configuration is good**
      
@@ -104,16 +104,16 @@ Configuring the IdP Keycloak:
 
 1. Open your browser tab with the Firefox container from the 'Getting Started' lab section.
 
-2. Login to keycloak
+2. Login to keycloak (you will need to type the URL below in to the Firefox container).
 
-url:
+URL:
 http://idp.f5lab.com:8080
 
-3. Click on Administration Console
+3. Click on Administration Console.
 
 .. image:: ../images/keycloak_admin_page.png
 
-4. Now enter credentials provided and sign in (if prompted, don't save the password)
+4. Now enter credentials provided below and sign in (if prompted, don't save the password).
 
 .. note:: 
 	Username: admin
@@ -125,11 +125,11 @@ http://idp.f5lab.com:8080
    
 Create a Keycloak client for NGINX Plus in the Keycloak GUI:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1. In the left navigation column, click Clients. 
+1. In the left navigation column, click 'Clients'. 
 
 .. image:: ../images/keycloak_click_clients.png
 		
-2. On the Clients page that opens, click the Create button in the upper right corner.
+2. On the Clients page that opens, click the 'Create' button in the upper right corner.
 		
 .. image:: ../images/keycloak_click_create.png
 				
@@ -137,7 +137,7 @@ Create a Keycloak client for NGINX Plus in the Keycloak GUI:
 
 **Client ID – appworld2024**
 
-**Client Protocol – openid-connect.**
+**Client Protocol – openid-connect**
 
 .. image:: ../images/ualab08.png
 
@@ -159,24 +159,24 @@ Valid Redirect URIs - http://nginxdemo.f5lab.com:8010/_codexch
 	For production, we strongly recommend that you use **SSL/TLS (port 443)**. The port number is **mandatory** even when you’re using the default port for HTTP (80) or HTTPS (443). 
 	Valid Redirect URIs – This is the URI of the NGINX Plus origin web server instance, including the port number, and ending in /_codexch
 
-5. Click the Credentials tab and copy the value in the 'Secret' field to the Firefox 'Clipboard', then make a note of it on your local machine by opening the Clipboard and copying the value. You will need this for the NGINX Plus configuration later.
+5. Scroll back up and click the 'Credentials' tab then copy the value (Ctrl-C) in the 'Secret' field to the Firefox 'Clipboard', then make a note of it on your local machine by opening the Clipboard and pasting the value (Ctrl-V). You will need this for the NGINX Plus configuration later.
 
 .. image:: ../images/client_secret.png
 .. image:: ../images/Firefox_Clipboard.jpg
 	
-6. While still under the appworld2024 Clients Page Click the Roles tab, then click the Add Role button in the upper right corner of the page that 
+6. While still under the appworld2024 Clients page, click the 'Roles' tab, then click the 'Add Role' button in the upper right corner of the page that 
 opens.
 
 .. image:: ../images/keycloak_click_role.png
 	
-7. On the Add Role page that opens, type a value in the Role Name field (here it is: nginx-keycloak-role) and click the 'Save' button.
+7. On the 'Add Role' page that opens, type a value in the 'Role Name' field (here it is: nginx-keycloak-role) and click the 'Save' button.
 
 .. image:: ../images/keycloak_save_role.png
 	
 Creating a user in keycloak
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. In the left navigation column, click Users. On the Users page that opens, then click the 'Add User' button in the upper right corner to create a new user with the Username "user01" (no quotes), then click 'Save'.
+1. In the left navigation column, click 'Users'. On the Users page that opens, then click the 'Add User' button in the upper right corner to create a new user with the Username "user01" (no quotes), then click 'Save'.
 
 .. image:: ../images/keycloak_add_user.png
 	
@@ -184,7 +184,7 @@ Creating a user in keycloak
 
 3. Enter the Password appworld2024 and Confirm.
 
-4. Toggle Temporary to OFF, and clock 'Set Password' (click yes, you're sure).
+4. Toggle Temporary to OFF, and click 'Set Password' (click yes, you're sure).
 
 .. image:: ../images/keycloak_cred.png
 	
@@ -198,7 +198,7 @@ Configure NGINX Plus as the OpenID Connect relying party
 
 1. Now go back to the NGINX 1 UDF Shell browser tab that you have open. You are going to run a configuration script.
 
-Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW** (use the Client Secret note that you made earlier to help build the command syntax).
+Please copy and paste the below command into the webshell  **DON'T FORGET TO REPLACE THE CLIENT SECRET FOR THE CODE BELOW** (use the 'Client Secret' note that you made earlier to help build the correct command syntax).
 
 .. code:: shell
 
@@ -244,7 +244,7 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 	cd /etc/nginx/conf.d/
 
-5. Using Nano edit the frontend.conf file
+5. Using Nano edit the frontend.conf file.
 
 .. code:: shell
 
@@ -299,17 +299,17 @@ Now that everything is done lets test the config!  Please go back to the Firefox
 
 .. image:: ../images/clear_cookies.png
 
-2. While still in Firefox, open a new tab and put http://nginxdemo.f5lab.com:8010 into the browser url field and launch the page.
+2. While still in Firefox, open a new tab and type http://nginxdemo.f5lab.com:8010 into the browser and launch the page.
 
 .. image:: ../images/test_oidc.png
 
 Notice you'll be redirected to the IdP for login. 
 
-3. Once on the IdP page put in the credentials for the user you created. user01 with password appworld2024 (do not save the credentials, if prompted)
+3. Once on the IdP page put in the credentials for the user you created. user01 with password appworld2024 (do not save the credentials, if prompted).
 
 .. image:: ../images/auth_login.png
 
-You should now see the webservice! You've been logged in and the browser has been issued a JWT Token establishing identity!  You can view the token by clicking 'More tools' and 'Web Developer Tools' in the Firefox menu, then selecting the 'Storage' tab and highlighting "auth_token".
+You should now see the webservice! You've been logged in and the browser has been issued a JWT Token establishing identity!  You can view the token by clicking 'More tools' and 'Web Developer Tools' in the Firefox Settings menu, then selecting the 'Storage' tab and highlighting "auth_token".
 
 .. image:: ../images/verificaion_webservice.png
 
@@ -327,7 +327,7 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 
 .. image:: ../images/nms_admin_login.png
 
-3. Once you are signed in, click on the instance manager module.
+3. Once you are signed in, click on the 'Instance Manager' module.
 
 .. image:: ../images/nms_modules.png
 
@@ -352,7 +352,7 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 
 	sudo systemctl start nginx-agent
 
-7. Now let's revisit the Instance Manager console and refresh the page. We should see the instance under the 'Instances' tab. 
+7. Now let's refresh the Instance Manager console and refresh the page. We should see the instance under the 'Instances' tab. 
 
 .. image:: ../images/instance_manager_instances.png
 
@@ -365,7 +365,7 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 Create the Nginx Plus Cluster in Instance Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. To begin, we need to install the same agent on the new NGINX servers. First open a webshell connection to NGINX 2 and then do the same for NGINX 3. 
+1. To begin, we need to install the same agent on the new NGINX servers. First open a webshell connection to NGINX 2 and then do the same for NGINX 3 (at this point, you should have all three NGINX servers open in UDF Webshell tabs). 
 
 .. image:: ../images/NGINX-2_webshell.jpg
 
@@ -410,7 +410,7 @@ Open the file for editing in nano:
 
 .. image:: ../images/instance-group-2.jpg
 
-...and then restart the agent on each server.
+...and then restart the agent on each of the three servers.
 
 .. code:: shell
 	
@@ -418,7 +418,7 @@ Open the file for editing in nano:
 
 .. image:: ../images/instance-group-3.jpg
 
-You should now see the Instance Group named 'default' in the Instance Manager.  We will need to 'Stage' the configuration that we created on NGINX 1 and sync it to NGINX 2 and 3.
+You should now see an **Instance Group** named 'default' in the Instance Manager.  We will need to 'Stage' the configuration that we created on NGINX 1 and sync it to NGINX 2 and 3.
 
    .. image:: ../images/instance-group-4.jpg
 
@@ -449,7 +449,7 @@ Name the staged configuration 'default-oidc' and click 'Save'.
 
 .. note:: 
 
-	You may see a message indicating that the publish completed, but is degraded.  Please disregard. If you go back into Instances and select, for example 'nginx-3', you'll see that the configuration was successfully synchronized.
+	You may see a message indicating that the publish completed, but is degraded.  Please disregard. If you go back into Instances and select, for example 'nginx-3' and 'Edit Config', you'll be able drop down the list of files names and see that the configuration was successfully synchronized.
 
    
 9.  Now we will go back to UDF and select 'Access' --> 'TMUI' to log on to the BIG-IP (admin:f5r0x!) in order to test and validate the configuration.  
@@ -467,12 +467,12 @@ Name the staged configuration 'default-oidc' and click 'Save'.
    .. image:: ../images/big-ip-4.jpg
    .. image:: ../images/big-ip-4.5.jpg
 
-12. Navigate back to DNS > GSLB > Pools > Pool List, select 'gslbPool' and click the 'Members' tab.
+12. Navigate back to DNS > GSLB > Pools > Pool List, select 'gslbPool' but, this time, click the 'Members' tab.
 
    .. image:: ../images/big-ip-5.jpg
 
 13. Here we will check the boxes next to 'nginx2' and 'nginx3' and click 'Enable' to add them in to the load balancing pool.
-    Refresh the page by clicking the 'Members' tab again and you will see the new members become active.
+    Refresh the page by clicking the 'Members' tab again and you will see the new members become active (it may take several seconds).
     Now click the 'Statistics' tab again and we are ready to test the configuation.
 
    .. image:: ../images/big-ip-6.jpg
@@ -490,6 +490,16 @@ Name the staged configuration 'default-oidc' and click 'Save'.
 
    .. image:: ../images/test-gslb-3.jpg
     
+17. You can also validate by running the command below on each of the three NGINX Plus servers.
+
+.. code:: shell
+
+   curl -i http://localhost:8010/api/8/http/keyvals/oidc_access_tokens
+
+For example, below we see the access token on nginx-2. 
+
+.. image:: ../images/nginx-2_validate_token.jpg
+
 
 Congratulations, you have successfully completed the lab!
 
