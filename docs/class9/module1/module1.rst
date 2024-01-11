@@ -23,8 +23,6 @@ Install NGINX Plus njs module
        
       sudo ls /etc/nginx/modules
 
-   .. note:: You can also use Ctrl/Shift+C to copy from the Webshell. 
-
    **screenshot of expected output**
 
    .. image:: ../images/ualab04.png
@@ -282,6 +280,12 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 .. image:: ../images/save_secret.png
 
+   Then scroll down further and add the keyword "sync" to the first three 'keyval_zone' variables at the bottom of the file, so that it looks like below.
+
+**screenshot of output**
+
+.. image:: ../images/keyval_zone.jpg
+
 **save and close file**
 
 11. Reload Nginx.
@@ -289,6 +293,10 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 .. code:: shell
 
 	nginx -s reload
+
+.. note:: 
+
+   Please leave the NGINX 1 server webshell connection open!:
 
 Testing the config
 ==================
@@ -312,6 +320,7 @@ Notice you'll be redirected to the IdP for login.
 You should now see the webservice! You've been logged in and the browser has been issued a JWT Token establishing identity!  You can view the token by clicking 'More tools' and 'Web Developer Tools' in the Firefox Settings menu, then selecting the 'Storage' tab and highlighting "auth_token".
 
 .. image:: ../images/verificaion_webservice.png
+
 
 
 Manage NGINX Plus with Instance Manager
@@ -418,16 +427,50 @@ Open the file for editing in nano:
 
 .. image:: ../images/instance-group-3.jpg
 
+In order to make sure our new cluster is performant, we need to sync the authentication tokens between the instances.
+
+5. First, open nginx.conf on -all three- NGINX servers using the command below.
+
+.. code:: shell
+	
+   nano /etc/nginx/nginx.conf
+
+6. Then add the 'stream' block below to the configuration, just before the 'http' block and save the file (Ctrl-X, y, enter).
+
+.. code:: shell
+	
+   stream {
+   resolver 127.0.0.53 valid=20s;
+    server {
+        listen 10.1.10.6:9000;
+        zone_sync;
+        zone_sync_server 10.1.10.6:9000;
+        zone_sync_server 10.1.10.7:9000;
+        zone_sync_server 10.1.10.8:9000;
+    }
+}
+
+**screenshot of output**
+
+.. image:: ../images/stream_block.jpg
+
+7. Reload NGINX on -all three- servers.
+
+.. code:: shell
+
+   nginx -s reload   
+
+
 You should now see an **Instance Group** named 'default' in the Instance Manager.  We will need to 'Stage' the configuration that we created on NGINX 1 and sync it to NGINX 2 and 3.
 
    .. image:: ../images/instance-group-4.jpg
 
 
-5. Go back to Instances tab and select 'nginx-1', then click 'Edit config'.
+1. Go back to Instances tab and select 'nginx-1', then click 'Edit config'.
 
    .. image:: ../images/edit-config-nginx-1.jpg
    
-6. Here you will select 'Save as' (the floppy disk icon).
+2. Here you will select 'Save as' (the floppy disk icon).
 
    .. image:: ../images/stage-1.jpg
 
