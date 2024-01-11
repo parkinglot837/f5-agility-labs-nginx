@@ -278,9 +278,11 @@ frontend.conf  openid_connect.js  openid_connect.server_conf  openid_connect_con
 
 10. Scroll down and modify the $oidc_client_secret from 0 to "yourclientsecret" from the earlier step, to look like the example below.  **Do not forget to add the quotation marks!**
 
+**screenshot of output**
+
 .. image:: ../images/save_secret.png
 
-   Then scroll down further and add the keyword "sync" to the first three 'keyval_zone' variables at the bottom of the file, so that it looks like below.
+Then scroll down further and add the keyword "sync" to the first three 'keyval_zone' variables at the bottom of the file, so that it looks like below.
 
 **screenshot of output**
 
