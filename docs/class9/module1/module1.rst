@@ -298,7 +298,7 @@ Then scroll down further and add the keyword "sync" to the first three 'keyval_z
 
 .. note:: 
 
-   Please leave the NGINX 1 server webshell connection open!:
+   Please leave the NGINX 1 server webshell connection open!
 
 Testing the config
 ==================
@@ -429,7 +429,7 @@ Open the file for editing in nano:
 
 .. image:: ../images/instance-group-3.jpg
 
-In order to make sure our new cluster is performant, we need to sync the authentication tokens between the instances.
+**In order to make sure our new cluster is performant, we need to sync the authentication tokens between the instances.**
 
 5. First, open nginx.conf on -all three- NGINX servers using the command below.
 
@@ -437,8 +437,12 @@ In order to make sure our new cluster is performant, we need to sync the authent
 	
    nano /etc/nginx/nginx.conf
 
-6. Then add the 'stream' block below to the configuration, just before the 'http' block and save the file (Ctrl-X, y, enter).
+6. Then add the 'stream' block below to the configuration, just before the 'http' block.
 
+.. attention::
+
+   **The server 'listen' directive needs to match the IP address of each server.  The example below shows 10.1.10.6, which is correct for NGINX 1.  For NGINX 2, change this to 10.1.10.7 and for NGINX 3, change it to 10.1.10.8.** 
+   
 .. code:: shell
 	
    stream {
@@ -449,12 +453,14 @@ In order to make sure our new cluster is performant, we need to sync the authent
         zone_sync_server 10.1.10.6:9000;
         zone_sync_server 10.1.10.7:9000;
         zone_sync_server 10.1.10.8:9000;
-    }
-}
+      }
+   }
 
 **screenshot of output**
 
 .. image:: ../images/stream_block.jpg
+
+**save and close file**
 
 7. Reload NGINX on -all three- servers.
 
