@@ -288,7 +288,7 @@ Then scroll down further and add the keyword "sync" to the first three 'keyval_z
 **screenshot of output**
 
 .. image:: ../images/keyval_zone.jpg
-   :width: 500
+   :width: 1000
 
 **save and close file**
 
@@ -365,7 +365,7 @@ The OIDC authentication is working correctly. Now we will manage our NGINX Plus 
 
 	sudo systemctl start nginx-agent
 
-7. Now let's refresh the Instance Manager console and refresh the page. We should see the instance under the 'Instances' tab. 
+7. Now let's refresh the Instance Manager page. We should see the instance under the 'Instances' tab. 
 
 .. image:: ../images/instance_manager_instances-w.jpg
 
@@ -412,7 +412,7 @@ Open the file for editing in nano:
    nano /var/lib/nginx-agent/agent-dynamic.conf
 
 .. image:: ../images/instance-group-1.jpg
-   :width: 400
+   :width: 1000
 ...add the following to the bottom of the file on each server and Save (Ctrl-X):
 
 .. code:: shell
@@ -422,7 +422,7 @@ Open the file for editing in nano:
 **screenshot of output**
 
 .. image:: ../images/instance-group-2.jpg
-   :width: 400
+   :width: 1000
 
 ...and then restart the agent on each of the three servers.
 
@@ -431,7 +431,7 @@ Open the file for editing in nano:
    sudo systemctl restart nginx-agent
 
 .. image:: ../images/instance-group-3.jpg
-   :width: 400
+   :width: 500
 
 **In order to make sure our new cluster is performant, we need to sync the authentication tokens between the instances.**
 
@@ -463,7 +463,7 @@ Open the file for editing in nano:
 **screenshot of output**
 
 .. image:: ../images/stream_block.jpg
-   :width: 400
+   :width: 800
 
 **save and close file**
 

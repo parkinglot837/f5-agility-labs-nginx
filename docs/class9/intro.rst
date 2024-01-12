@@ -18,7 +18,7 @@ Welcome to Access on NGINX Plus - Authentication for Web Access. In this course 
 Please follow the instructions provided by the instructor to start your lab.
 
 .. attention:: 
-	 All work for this lab will be performed exclusively from the UDF session. No installation or interaction with your local system is required.
+	 All work for this lab will be performed exclusively from the UDF session. No installation and only minimal interaction with your local system is required.
 
 Lab Topology
 ~~~~~~~~~~~~

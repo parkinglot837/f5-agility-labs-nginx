@@ -34,7 +34,7 @@ Expected time to complete: **1.5 hours**
 
    * All work for this lab will be performed exclusively from the UDF Webshell and Firefox Container
 
-   * No installation or interaction with your local system is required
+   * No installation and only minimal interaction with your local system is required
 
 .. attention::
    * For anyone wishing to take this lab at a later date, the lab is hosted on
