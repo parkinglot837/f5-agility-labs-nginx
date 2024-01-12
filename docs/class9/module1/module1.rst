@@ -497,11 +497,6 @@ Name the staged configuration 'default-oidc' and click 'Save'.
    .. image:: ../images/publish-1.jpg
 
    .. image:: ../images/publish-2.jpg
-
-.. note:: 
-
-	You may see a message indicating that the publish completed, but is degraded.  Please disregard. If you go back into Instances and select, for example 'nginx-3' and 'Edit Config', you'll be able drop down the list of files names and see that the configuration was successfully synchronized.
-
    
 9.  Now we will go back to UDF and select 'Access' --> 'TMUI' to log on to the BIG-IP (admin:f5r0x!) in order to test and validate the configuration.  
 
@@ -518,7 +513,7 @@ Name the staged configuration 'default-oidc' and click 'Save'.
    .. image:: ../images/big-ip-4.jpg
    .. image:: ../images/big-ip-4.5.jpg
 
-12. Navigate back to DNS > GSLB > Pools > Pool List, select 'gslbPool' but, this time, click the 'Members' tab.
+12. Click the 'back' button on your web browser to get back to the 'gslbPool.  This time select the 'Members' tab.
 
    .. image:: ../images/big-ip-5.jpg
 
@@ -541,13 +536,13 @@ Name the staged configuration 'default-oidc' and click 'Save'.
 
    .. image:: ../images/test-gslb-3.jpg
     
-17. You can also validate by running the command below on each of the three NGINX Plus servers.
+17. Finally, validate the configuration by running the command below on -each of the three- NGINX Plus servers to confirm that the access token has synchronized.
 
 .. code:: shell
 
    curl -i http://localhost:8010/api/8/http/keyvals/oidc_access_tokens
 
-For example, below we see the access token on nginx-2. 
+For example, below we see the access token on nginx-2. Run the same command on nginx-1 and nginx-3 and you should see the same token.
 
 .. image:: ../images/nginx-2_validate_token.jpg
 
